@@ -1,0 +1,53 @@
+export ZOPEN_DEV_URL="git@github.com:paladin-t/my_basic.git"
+export ZOPEN_DEV_DEPS="zoslib"
+export ZOPEN_BUILD_LINE="DEV"
+export ZOPEN_CATEGORIES="language"
+
+export ZOPEN_BOOTSTRAP='skip'
+export ZOPEN_CONFIGURE='skip'
+export ZOPEN_MAKE='zopen_basic_make'
+export ZOPEN_CHECK='zopen_basic_check'
+export ZOPEN_INSTALL='zopen_basic_install'
+
+export ZOPEN_COMP='clang'
+export ZOPEN_EXTRA_CFLAGS='-D_XOPEN_SOURCE=600 -Wwarning'
+
+zopen_basic_make()
+{
+  MYDIR=${PWD}
+  rm -rf "${MYDIR}/bin" && mkdir -p "${MYDIR}/bin" && ${CC} ${CFLAGS} ${LDFLAGS} -o${MYDIR}/bin/my_basic ${MYDIR}/shell/main.c ${MYDIR}/core/my_basic.c
+  return $?
+}
+
+zopen_basic_check()
+{
+  return 0
+}
+
+zopen_basic_install()
+{
+  MYDIR=${PWD}
+  mkdir -p "$ZOPEN_INSTALL_DIR/bin"
+  cp "${MYDIR}/bin/my_basic" "${ZOPEN_INSTALL_DIR}/bin/my_basic"
+  return 0
+}
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+  echo "expectedTotalTests:1"
+}
+
+zopen_get_version()
+{
+  # Modify to echo the version of your tool/library
+  # Rather than hardcoding the version, obtain the version by running the tool/library
+  echo "1.0.0"
+}
