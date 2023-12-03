@@ -1,0 +1,22 @@
+diff --git a/core/my_basic.c b/core/my_basic.c
+index 9f9fc02..afba082 100755
+--- a/core/my_basic.c
++++ b/core/my_basic.c
+@@ -14991,9 +14991,14 @@ int mb_gets(struct mb_interpreter_t* s, const char* pmt, char* buf, int n) {
+ 
+ 	if(buf && n) {
+ 		if(fgets(buf, n, stdin) == 0) {
+-			fprintf(stderr, "Error reading.\n");
+-
+-			exit(1);
++      char* eof = getenv("BASIC_EOF");
++      size_t eoflen = strlen(eof);
++      if (eof && (eoflen+2 < n)) {
++        sprintf(buf, "%s\n", eof);
++      } else {
++        fprintf(stderr, "Error reading.\n");
++        exit(1);
++      }
+ 		}
+ 		result = (int)strlen(buf);
+ 		if(buf[result - 1] == _NEWLINE_CHAR) {
