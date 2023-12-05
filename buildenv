@@ -10,12 +10,12 @@ export ZOPEN_CHECK='zopen_basic_check'
 export ZOPEN_INSTALL='zopen_basic_install'
 
 export ZOPEN_COMP='clang'
-export ZOPEN_EXTRA_CFLAGS='-D_XOPEN_SOURCE=600 -Wwarning'
+export ZOPEN_EXTRA_CFLAGS='-D_XOPEN_SOURCE=600'
 
 zopen_basic_make()
 {
-  MYDIR=${PWD}
-  rm -rf "${MYDIR}/bin" && mkdir -p "${MYDIR}/bin" && ${CC} ${CFLAGS} ${LDFLAGS} -o${MYDIR}/bin/my_basic ${MYDIR}/shell/main.c ${MYDIR}/core/my_basic.c
+  MYPROJDIR=${PWD}
+  rm -rf "${MYPROJDIR}/bin" && mkdir -p "${MYPROJDIR}/bin" && ${CC} ${CFLAGS} ${LDFLAGS} -o${MYPROJDIR}/bin/my_basic ${MYPROJDIR}/shell/main.c ${MYPROJDIR}/core/my_basic.c
   return $?
 }
 
@@ -26,9 +26,9 @@ zopen_basic_check()
 
 zopen_basic_install()
 {
-  MYDIR=${PWD}
+  MYPROJDIR=${PWD}
   mkdir -p "$ZOPEN_INSTALL_DIR/bin"
-  cp "${MYDIR}/bin/my_basic" "${ZOPEN_INSTALL_DIR}/bin/my_basic"
+  cp "${MYPROJDIR}/bin/my_basic" "${ZOPEN_INSTALL_DIR}/bin/my_basic"
   return 0
 }
 
