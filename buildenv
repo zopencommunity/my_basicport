@@ -1,4 +1,4 @@
-export ZOPEN_DEV_URL="git@github.com:paladin-t/my_basic.git"
+export ZOPEN_DEV_URL="https://github.com/paladin-t/my_basic.git"
 export ZOPEN_DEV_DEPS="zoslib"
 export ZOPEN_BUILD_LINE="DEV"
 export ZOPEN_CATEGORIES="language"
